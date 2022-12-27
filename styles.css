@@ -1,0 +1,154 @@
+body {
+  background: linear-gradient(
+    109.6deg,
+    rgb(13, 20, 32) 11.2%,
+    rgb(21, 35, 51) 91.1%
+  );
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Cabin", sans-serif;
+  font-size: larger;
+  color: #7c99fc;
+  padding-bottom: 10px;
+}
+
+.content {
+  max-width: 800px;
+  margin: auto;
+  color: #7c99fc;
+  border: rgba(240, 248, 255, 0.658) 1px solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.current-date-time {
+  text-align: center;
+  font-size: 14px;
+}
+
+.current-weather-box {
+  padding-top: 20px;
+}
+.current-temperature {
+  font-size: 100px;
+  font-weight: bolder;
+  text-align: end;
+  position: relative;
+  color: #84baff;
+  font-family: "Cabin", sans-serif;
+}
+.celsius-fahrenheit {
+  display: flex;
+  align-self: flex-end;
+  padding-bottom: 43px;
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+}
+.current-day,
+.day-max-min {
+  text-align: center;
+  margin: 0 auto;
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+}
+.stats {
+  text-align: center;
+  padding: 10px;
+  margin: 3%;
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+}
+.stats-number {
+  font-size: 32px;
+  font-family: "Cabin", sans-serif;
+  font-weight: bolder;
+  margin: -8px;
+  color: #84baff;
+}
+.future-weather-box {
+  text-align: center;
+  margin-top: 40px;
+}
+.future-weather-image {
+  max-width: 80px;
+}
+.search-bar-box {
+  margin: 0 auto 30px;
+}
+.localization-icon {
+  font-size: 30px;
+  text-align: center;
+  display: inline;
+  color: #84baff;
+  transition: all 200ms ease;
+}
+#localization-input {
+  width: 100%;
+  line-height: 1.3rem;
+  border-radius: 5px;
+  padding: 7px;
+  margin-top: 7px;
+  background-color: #84b9ff31;
+  transition: all 200ms ease;
+}
+.submit-button {
+  width: 100%;
+  line-height: 1.3rem;
+  border: rgba(240, 248, 255, 0.658) 1px solid;
+  border-radius: 10px;
+  padding: 7px;
+  margin-top: 7px;
+  background-color: #7c9afc00;
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+  transition: all 200ms ease;
+}
+.future-day-temperature,
+.future-day {
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+}
+.tempFormat {
+  font-weight: 900;
+}
+
+#celsius,
+#fahrenheit {
+  padding: 0 10px;
+}
+
+.localization-icon:hover {
+  cursor: pointer;
+  color: #c329bf;
+}
+.submit-button:hover {
+  color: #c329bf;
+  border-color: #c329bf;
+  box-shadow: #c329bf;
+}
+.localization-input:hover {
+  border-color: #c329bf;
+  box-shadow: #c329bf;
+}
+
+#celsius:hover,
+#fahrenheit:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 775px) {
+  .future-weather-image {
+    padding-top: 30px;
+    padding-bottom: 15px;
+  }
+  .current-temperature {
+    right: -20px;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,103 @@
+let apiKey = "ac209dae1f283fb332a5bb7f50b0f468";
+let apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric";
+
+function findCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(findPosition);
+}
+
+function findPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  axios.get(`${apiUrl}&appid=${apiKey}&lat=${lat}&lon=${lon}`).then(updatePage);
+}
+
+function setCity(event) {
+  event.preventDefault();
+  let city = document.querySelector("#localization-input");
+  axios.get(`${apiUrl}&appid=${apiKey}&q=${city.value}`).then(updatePage);
+}
+
+function updatePage(response) {
+  let tempToday = document.querySelector(".current-temperature");
+  tempToday.innerHTML = Math.round(response.data.main.temp) + "°";
+  let cityTitle = document.querySelector("h1");
+  cityTitle.innerHTML = response.data.name;
+}
+
+function formatDate(now) {
+  let months = [
+    "JANUARY",
+    "FFEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER",,
+  ];
+
+  let date = now.getDate();
+  let year = now.getFullYear();
+  let month = months[now.getMonth()];
+  let hour = now.getHours();
+  if (hour > 12) {
+    let currentHour = hour;
+    hour = currentHour - 12;
+  }
+  let minute = now.getMinutes();
+  if (minute < 10) {
+    minute = String(minute).padStart(2, "0");
+  }
+  let meridiem = "am";
+  if (now.getHours() > 12) {
+    meridiem = "pm";
+  }
+  return `${month} ${date} ${year} - ${hour}:${minute} ${meridiem}`;
+}
+
+function formatDay(now) {
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let day = days[now.getDay()];
+  return `${day}`;
+}
+
+function formatTemperatureCelsius() {
+  temperatureFormatCelsius.classList.add("tempFormat");
+  temperatureFormatFahrenheit.classList.remove("tempFormat");
+  let currentTemperatureFormat = document.querySelector(".current-temperature");
+  let temperatureCalculator = ((51.8 - 32) * 5) / 9;
+  let temperatureCalculatorRounded = Math.round(temperatureCalculator);
+  currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";
+}
+function formatTemperatureFahrenheit() {
+  temperatureFormatFahrenheit.classList.add("tempFormat");
+  temperatureFormatCelsius.classList.remove("tempFormat");
+  let currentTemperatureFormat = document.querySelector(".current-temperature");
+  let temperatureCalculator = (11 * 9) / 5 + 32;
+  let temperatureCalculatorRounded = Math.round(temperatureCalculator);
+  currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";
+}
+let locationFinder = document.querySelector(".localization-icon");
+locationFinder.addEventListener("click", findCurrentLocation);
+
+let citySubmitButton = document.querySelector("#cityForm");
+citySubmitButton.addEventListener("submit", setCity);
+
+let currentTimeShower = document.querySelector("#current-date-time");
+currentTimeShower.innerHTML = formatDate(new Date());
+
+let currentDayShower = document.querySelector("#current-day");
+currentDayShower.innerHTML = formatDay(new Date());
+
+let temperatureFormatCelsius = document.querySelector("#celsius");
+temperatureFormatCelsius.addEventListener("click", formatTemperatureCelsius);
+
+let temperatureFormatFahrenheit = document.querySelector("#fahrenheit");
+temperatureFormatFahrenheit.addEventListener(
+  "click",
+  formatTemperatureFahrenheit
+);
