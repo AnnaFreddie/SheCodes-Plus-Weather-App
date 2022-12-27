@@ -18,6 +18,17 @@ h1 {
   padding-bottom: 10px;
 }
 
+a {
+  color: rgba(240, 248, 255, 0.658);
+}
+
+footer {
+  font-family: "Raleway", sans-serif;
+  color: rgba(240, 248, 255, 0.658);
+  text-align: center;
+  padding: 10px;
+}
+
 .content {
   max-width: 800px;
   margin: auto;
