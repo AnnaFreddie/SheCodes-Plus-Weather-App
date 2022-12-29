@@ -41,6 +41,15 @@ function updatePage(response) {
       `Weather icon showing ${response.data.condition.description}`
     );
     celsiusTemperature = response.data.temperature.current;
+
+    let pressure = document.querySelector("#pressure");
+    pressure.innerHTML = response.data.temperature.pressure;
+    let feelsLike = document.querySelector("#feels_like");
+    feelsLike.innerHTML = `${response.data.temperature.feels_like}°`;
+    let humidity = document.querySelector("#humidity");
+    humidity.innerHTML = `${response.data.temperature.humidity}%`;
+    let wind = document.querySelector("#wind");
+    wind.innerHTML = response.data.wind.speed;
   }
 }
 
