@@ -1,5 +1,5 @@
-let apiKey = "ac209dae1f283fb332a5bb7f50b0f468";
-let apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric";
+let apiKey = "t656554481485f7341b044a7o3281c2b";
+let apiUrl = "https://api.shecodes.io/weather/v1/current?units=metric";
 
 function findCurrentLocation() {
   navigator.geolocation.getCurrentPosition(findPosition);
@@ -8,20 +8,20 @@ function findCurrentLocation() {
 function findPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  axios.get(`${apiUrl}&appid=${apiKey}&lat=${lat}&lon=${lon}`).then(updatePage);
+  axios.get(`${apiUrl}&key=${apiKey}&lat=${lat}&lon=${lon}`).then(updatePage);
 }
 
 function setCity(event) {
   event.preventDefault();
   let city = document.querySelector("#localization-input");
-  axios.get(`${apiUrl}&appid=${apiKey}&q=${city.value}`).then(updatePage);
+  axios.get(`${apiUrl}&key=${apiKey}&query=${city.value}`).then(updatePage);
 }
 
 function updatePage(response) {
   let tempToday = document.querySelector(".current-temperature");
-  tempToday.innerHTML = Math.round(response.data.main.temp) + "°";
+  tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
   let cityTitle = document.querySelector("h1");
-  cityTitle.innerHTML = response.data.name;
+  cityTitle.innerHTML = response.data.city;
 }
 
 function formatDate(now) {
@@ -37,7 +37,8 @@ function formatDate(now) {
     "SEPTEMBER",
     "OCTOBER",
     "NOVEMBER",
-    "DECEMBER",,
+    "DECEMBER",
+    ,
   ];
 
   let date = now.getDate();
