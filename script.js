@@ -18,26 +18,28 @@ function setCity(event) {
 }
 
 function updatePage(response) {
-  let tempToday = document.querySelector(".current-temperature");
+  let tempToday = document.querySelector("#current-temperature");
   tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
-  let cityTitle = document.querySelector("h1");
-  cityTitle.innerHTML = response.data.city;
+  let cityName = document.querySelector("h1");
+  cityName.innerHTML = response.data.city;
+  let countryName = document.querySelector("h2");
+  countryName.innerHTML = response.data.country;
 }
 
 function formatDate(now) {
   let months = [
-    "JANUARY",
-    "FFEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOBER",
-    "NOVEMBER",
-    "DECEMBER",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
     ,
   ];
 
@@ -69,7 +71,7 @@ function formatDay(now) {
 function formatTemperatureCelsius() {
   temperatureFormatCelsius.classList.add("tempFormat");
   temperatureFormatFahrenheit.classList.remove("tempFormat");
-  let currentTemperatureFormat = document.querySelector(".current-temperature");
+  let currentTemperatureFormat = document.querySelector("#current-temperature");
   let temperatureCalculator = ((51.8 - 32) * 5) / 9;
   let temperatureCalculatorRounded = Math.round(temperatureCalculator);
   currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";
@@ -77,7 +79,7 @@ function formatTemperatureCelsius() {
 function formatTemperatureFahrenheit() {
   temperatureFormatFahrenheit.classList.add("tempFormat");
   temperatureFormatCelsius.classList.remove("tempFormat");
-  let currentTemperatureFormat = document.querySelector(".current-temperature");
+  let currentTemperatureFormat = document.querySelector("#current-temperature");
   let temperatureCalculator = (11 * 9) / 5 + 32;
   let temperatureCalculatorRounded = Math.round(temperatureCalculator);
   currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";

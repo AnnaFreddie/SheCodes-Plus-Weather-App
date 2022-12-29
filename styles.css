@@ -10,17 +10,17 @@ img {
   width: 100%;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
   font-family: "Cabin", sans-serif;
-  font-size: larger;
   color: #7c99fc;
-  padding-bottom: 10px;
 }
 
 a {
   color: rgba(240, 248, 255, 0.658);
 }
+/* doesn work, needs fixing */
 
 footer {
   font-family: "Raleway", sans-serif;
@@ -31,28 +31,28 @@ footer {
 
 .content {
   max-width: 800px;
-  margin: auto;
+  margin: 60px auto 0;
   color: #7c99fc;
   border: rgba(240, 248, 255, 0.658) 1px solid;
   border-radius: 20px;
   padding: 20px;
 }
 
-.current-date-time {
-  text-align: center;
-  font-size: 14px;
-}
-
 .current-weather-box {
   padding-top: 20px;
+  border: rgba(240, 248, 255, 0.658) 1px solid;
+  border-radius: 20px;
 }
-.current-temperature {
+
+#current-temperature {
   font-size: 100px;
   font-weight: bolder;
   text-align: end;
   position: relative;
   color: #84baff;
   font-family: "Cabin", sans-serif;
+  right: -20px;
+  padding: 30px 10px 10px 10px;
 }
 .celsius-fahrenheit {
   display: flex;
@@ -61,13 +61,23 @@ footer {
   font-family: "Raleway", sans-serif;
   color: rgba(240, 248, 255, 0.658);
 }
-.current-day,
-.day-max-min {
+#current-day,
+.day-max-min,
+#current-date-time {
   text-align: center;
   margin: 0 auto;
   font-family: "Raleway", sans-serif;
   color: rgba(240, 248, 255, 0.658);
 }
+
+#current-day {
+  padding-top: 20px;
+}
+
+#stats-row {
+  justify-content: center;
+}
+
 .stats {
   text-align: center;
   padding: 10px;
@@ -99,6 +109,13 @@ footer {
   color: #84baff;
   transition: all 200ms ease;
 }
+
+#current-icon {
+  max-width: 130px;
+  display: block;
+  margin: auto;
+}
+
 #localization-input {
   width: 100%;
   line-height: 1.3rem;
@@ -157,9 +174,5 @@ footer {
   .future-weather-image {
     padding-top: 30px;
     padding-bottom: 15px;
-  }
-  .current-temperature {
-    right: -20px;
-    padding: 10px;
   }
 }

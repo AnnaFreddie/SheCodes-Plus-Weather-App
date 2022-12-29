@@ -47,52 +47,53 @@
             </div>
           </form>
         </section>
-        <h1>Zurich</h1>
-        <div class="col-12 current-date-time" id="current-date-time">
-          DECEMBER 12 2022
-        </div>
         <section class="current-weather-box">
-          <div class="row weather-details">
-            <div class="col-12 col-sm-7">
-              <img src="images/Thunder.png" alt="" />
+          <div class="row current-weather-details">
+            <div class="col-12 col-sm-6">
+              <h1>Zurich</h1>
+              <h2>Switzerland</h2>
+              <div class="col-12" id="current-date-time">DECEMBER 12 2022</div>
+              <img
+                id="current-icon"
+                src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                alt="weather icon showing current weather"
+              />
             </div>
             <div class="col-12 col-sm-5">
               <div class="row">
-                <div class="col-11 current-day" id="current-day">FRI</div>
+                <div class="col-11" id="current-day"></div>
               </div>
               <div class="row">
-                <div class="col-6 current-temperature">11°</div>
+                <div class="col-11 day-max-min">13° / 8°</div>
+              </div>
+              <div class="row">
+                <div class="col-6" id="current-temperature">12°</div>
                 <div class="col-6 celsius-fahrenheit">
                   <div id="celsius">C</div>
                   |
                   <div id="fahrenheit">F</div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-11 day-max-min">13° / 8°</div>
-              </div>
-              <div class="row">
-                <div class="col-5 stats">
-                  Feels like
-                  <div class="stats-number">13°</div>
-                </div>
-                <div class="col-5 stats">
-                  Humidity
-                  <div class="stats-number">62%</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 stats">
-                  Pressure
-                  <div class="stats-number">1000</div>
-                  hPa
-                </div>
-                <div class="col-5 stats">
-                  Wind
-                  <div class="stats-number">6</div>
-                  km/h
-                </div>
-              </div>
+            </div>
+          </div>
+          <div class="row" id="stats-row">
+            <div class="col-5 col-sm-2 stats">
+              Feels like
+              <div class="stats-number">13°</div>
+            </div>
+            <div class="col-5 col-sm-2 stats">
+              Humidity
+              <div class="stats-number">62%</div>
+            </div>
+            <div class="col-5 col-sm-2 stats">
+              Pressure
+              <div class="stats-number">1000</div>
+              hPa
+            </div>
+            <div class="col-5 col-sm-2 stats">
+              Wind
+              <div class="stats-number">6</div>
+              km/h
             </div>
           </div>
         </section>
@@ -103,8 +104,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
@@ -118,8 +119,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
@@ -133,8 +134,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
@@ -148,8 +149,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
@@ -163,8 +164,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
@@ -178,8 +179,8 @@
                 <div class="col-3 col-md-12 future-day">SAT</div>
                 <div class="col-3 col-md-12">
                   <img
-                    src="images/Thunder-Blue.png"
-                    alt="Weather icon for thunder"
+                    src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                    alt="Weather icon for future weather"
                     class="future-weather-image"
                   />
                 </div>
