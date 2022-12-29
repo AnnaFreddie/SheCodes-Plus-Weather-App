@@ -18,12 +18,16 @@ function setCity(event) {
 }
 
 function updatePage(response) {
-  let tempToday = document.querySelector("#current-temperature");
-  tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
-  let cityName = document.querySelector("h1");
-  cityName.innerHTML = response.data.city;
-  let countryName = document.querySelector("h2");
-  countryName.innerHTML = response.data.country;
+  if (response.data.city === undefined) {
+    alert("Please provide an existing city🧐");
+  } else {
+    let tempToday = document.querySelector("#current-temperature");
+    tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
+    let cityName = document.querySelector("h1");
+    cityName.innerHTML = response.data.city;
+    let countryName = document.querySelector("h2");
+    countryName.innerHTML = response.data.country;
+  }
 }
 
 function formatDate(now) {
