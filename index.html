@@ -27,11 +27,14 @@
   </head>
   <body>
     <div class="container">
-      <div class="content-box">
+      <div id="content-box" class="content-box-daytime">
         <section class="search-bar-box">
           <form id="cityForm">
             <div class="row">
-              <div class="col-2 col-md-1 localization-icon">
+              <div
+                id="localization-icon"
+                class="col-2 col-md-1 text-daytime-darker"
+              >
                 <i class="fa-solid fa-location-crosshairs"></i>
               </div>
               <div class="col-6 col-md-9">
@@ -42,31 +45,41 @@
                 />
               </div>
               <div class="col-4 col-md-2">
-                <input class="submit-button" type="submit" />
+                <input
+                  id="submit-button"
+                  class="text-daytime-darker"
+                  type="submit"
+                />
               </div>
             </div>
           </form>
         </section>
-        <section class="current-weather-box">
+        <section id="current-weather-box" class="current-weather-box-daytime">
           <div class="row current-weather-details">
             <div class="col-12 col-sm-6">
-              <h1>Zurich</h1>
-              <h2>Switzerland</h2>
-              <div class="col-12" id="current-date-time"></div>
-              <img
-                id="current-weather-icon"
-                src=""
-                alt="weather icon showing current weather"
-              />
+              <h1 class="text-daytime-lighter">Zurich</h1>
+              <h2 class="text-daytime-lighter">Switzerland</h2>
+              <div
+                class="col-12 text-daytime-darker"
+                id="current-date-time"
+              ></div>
+              <img id="current-weather-icon" />
             </div>
             <div class="col-12 col-sm-5">
               <div class="row">
-                <div class="col-12" id="current-weather-description"></div>
-                <div class="col-11" id="current-day"></div>
+                <div class="col-11 text-daytime-darker" id="day-time"></div>
+                <div
+                  id="current-weather-description"
+                  class="col-12 text-daytime-lighter"
+                ></div>
+                <div class="col-11 text-daytime-darker" id="current-day"></div>
               </div>
               <div class="row">
-                <div class="col-6" id="current-temperature"></div>
-                <div class="col-6 celsius-fahrenheit">
+                <div
+                  class="col-6 text-daytime-lighter"
+                  id="current-temperature"
+                ></div>
+                <div class="col-6 celsius-fahrenheit text-daytime-darker">
                   <div class="tempFormat" id="celsius">C</div>
                   |
                   <div id="fahrenheit">F</div>
@@ -75,22 +88,31 @@
             </div>
           </div>
           <div class="row" id="stats-row">
-            <div class="col-5 col-sm-2 stats">
+            <div class="col-5 col-sm-2 stats text-daytime-darker">
               Feels like
-              <div class="stats-number" id="feels_like"></div>
+              <div
+                class="stats-number text-daytime-lighter"
+                id="feels_like"
+              ></div>
             </div>
-            <div class="col-5 col-sm-2 stats">
+            <div class="col-5 col-sm-2 stats text-daytime-darker">
               Humidity
-              <div class="stats-number" id="humidity"></div>
+              <div
+                class="stats-number text-daytime-lighter"
+                id="humidity"
+              ></div>
             </div>
-            <div class="col-5 col-sm-2 stats">
+            <div class="col-5 col-sm-2 stats text-daytime-darker">
               Pressure
-              <div class="stats-number" id="pressure"></div>
+              <div
+                class="stats-number text-daytime-lighter"
+                id="pressure"
+              ></div>
               hPa
             </div>
-            <div class="col-5 col-sm-2 stats">
+            <div class="col-5 col-sm-2 stats text-daytime-darker">
               Wind
-              <div class="stats-number" id="wind"></div>
+              <div class="stats-number text-daytime-lighter" id="wind"></div>
               km/h
             </div>
           </div>
@@ -99,7 +121,9 @@
           <div class="row">
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -107,14 +131,18 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -122,14 +150,18 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -137,14 +169,18 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -152,14 +188,18 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -167,14 +207,18 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <div class="row">
-                <div class="col-3 col-md-12 future-day">SAT</div>
+                <div class="col-3 col-md-12 future-day text-daytime-darker">
+                  SAT
+                </div>
                 <div class="col-3 col-md-12">
                   <img
                     src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
@@ -182,7 +226,9 @@
                     class="future-weather-image"
                   />
                 </div>
-                <div class="col-6 col-md-12 future-day-temperature">
+                <div
+                  class="col-6 col-md-12 future-day-temperature text-daytime-darker"
+                >
                   13° / 8°
                 </div>
               </div>

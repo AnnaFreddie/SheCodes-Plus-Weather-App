@@ -24,21 +24,55 @@ footer {
   padding: 10px;
 }
 
+/*Styling day and night versions*/
+.content-box-daytime {
+  background-color: #f1dac4;
+  transition: all 1000ms ease;
+}
+.content-box-nighttime {
+  background-color: #355070;
+  transition: all 1000ms ease;
+}
+.current-weather-box-daytime {
+  background-color: #eaac8b;
+  transition: all 1000ms ease;
+}
+.current-weather-box-nighttime {
+  background-color: #6d597a;
+  transition: all 1000ms ease;
+}
+.text-daytime-darker {
+  color: #355070;
+  transition: all 1000ms ease;
+}
+.text-daytime-lighter {
+  color: #6d597a;
+  border-color: #6d597a;
+  transition: all 1000ms ease;
+}
+.text-nighttime-darker {
+  color: #b56576;
+  transition: all 1000ms ease;
+}
+.text-nighttime-lighter {
+  color: #eaac8b;
+  border-color: #eaac8b;
+  transition: all 1000ms ease;
+}
+
 /*Box stylings*/
-.content-box {
+#content-box {
   max-width: 800px;
   margin: 60px auto 0;
-  background-color: #f1dac4;
   border-radius: 20px;
   padding: 20px;
 }
 .search-bar-box {
   margin: 0 auto 30px;
 }
-.current-weather-box {
+#current-weather-box {
   padding-top: 20px;
   border-radius: 20px;
-  background-color: #eaac8b;
 }
 .future-weather-box {
   text-align: center;
@@ -46,11 +80,10 @@ footer {
 }
 
 /*Styling for search bar localization*/
-.localization-icon {
+#localization-icon {
   font-size: 30px;
   text-align: center;
   display: inline;
-  color: #474973;
   padding-top: 4px;
   transition: all 200ms ease;
 }
@@ -60,19 +93,19 @@ footer {
   border-radius: 5px;
   padding: 7px;
   margin-top: 7px;
-  background-color: #84b9ff31;
+  background-color: #253f6331;
   transition: all 200ms ease;
 }
-.submit-button {
+
+#submit-button {
   width: 100%;
   line-height: 1.4rem;
-  border: #6d597a 1.5px solid;
+  border: 1.5px solid;
   border-radius: 10px;
   padding: 7px;
   margin-top: 7px;
-  background-color: #7c9afc00;
+  background-color: #253f6331;
   font-family: "Raleway", sans-serif;
-  color: #6d597a;
   transition: all 200ms ease;
 }
 
@@ -87,7 +120,6 @@ footer {
   text-align: center;
   font-size: large;
   font-family: "Cabin", sans-serif;
-  color: #474973;
   text-transform: capitalize;
 }
 #current-temperature {
@@ -95,7 +127,6 @@ footer {
   font-weight: bolder;
   text-align: end;
   position: relative;
-  color: #474973;
   font-family: "Cabin", sans-serif;
   right: -20px;
 }
@@ -104,15 +135,13 @@ footer {
   align-self: flex-end;
   padding-bottom: 43px;
   font-family: "Raleway", sans-serif;
-  color: #6d597a;
 }
 #current-day,
-.day-max-min,
-#current-date-time {
+#current-date-time,
+#day-time {
   text-align: center;
   margin: 0 auto;
   font-family: "Raleway", sans-serif;
-  color: #6d597a;
 }
 #current-day {
   padding-top: 20px;
@@ -125,14 +154,12 @@ footer {
   padding: 10px;
   margin: 3%;
   font-family: "Raleway", sans-serif;
-  color: #6d597a;
 }
 .stats-number {
   font-size: 32px;
   font-family: "Cabin", sans-serif;
   font-weight: bolder;
   margin: -8px;
-  color: #474973;
 }
 
 /*Sytling for weather fortecast*/
@@ -142,7 +169,6 @@ footer {
 .future-day-temperature,
 .future-day {
   font-family: "Raleway", sans-serif;
-  color: #6d597a;
 }
 .tempFormat {
   font-weight: 900;
@@ -154,27 +180,24 @@ footer {
 }
 
 /* Pseudo Classes*/
-
-.localization-icon:hover {
+#localization-icon.text-daytime-darker:hover,
+#submit-button.text-daytime-darker:hover,
+#localization-input.text-daytime-darker:hover {
   cursor: pointer;
   color: #b56576;
 }
-.submit-button:hover {
-  color: #b56576;
-  border-color: #b56576;
-  box-shadow: #b56576;
-}
-.localization-input:hover {
-  border-color: #b56576;
-  box-shadow: #b56576;
+/*Localization icon defekt*/
+
+#localization-icon.text-nightime-darker:hover,
+#submit-button.text-nighttime-darker:hover,
+#localization-input.text-time-darker:hover {
+  cursor: pointer;
+  color: #eaac8b;
 }
 
 #celsius:hover,
 #fahrenheit:hover {
   cursor: pointer;
-}
-a:hover {
-  color: #6d597a;
 }
 
 @media only screen and (min-width: 775px) {

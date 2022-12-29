@@ -50,7 +50,57 @@ function updatePage(response) {
     humidity.innerHTML = `${response.data.temperature.humidity}%`;
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
+
+    if (response.data.condition.icon.slice(-5) == "night") {
+      setNight();
+    } else {
+      removeNight();
+    }
   }
+}
+
+function setNight() {
+  const AllTextsDarker = document.querySelectorAll(".text-daytime-darker");
+  for (const text of AllTextsDarker) {
+    text.classList.add("text-nighttime-darker");
+    text.classList.remove("text-daytime-darker");
+  }
+  const AllTextsLighter = document.querySelectorAll(".text-daytime-lighter");
+  for (const text of AllTextsLighter) {
+    text.classList.add("text-nighttime-lighter");
+    text.classList.remove("text-daytime-lighter");
+  }
+  contentBox = document.querySelector("#content-box");
+  contentBox.classList.add("content-box-nighttime");
+  contentBox.classList.remove("content-box-daytime");
+  currentWeather = document.querySelector("#current-weather-box");
+  currentWeather.classList.add("current-weather-box-nighttime");
+  currentWeather.classList.remove("current-weather-box-daytime");
+
+  let nightInfo = document.querySelector("#day-time");
+  nightInfo.innerHTML = "It's night time 🌙";
+}
+
+function removeNight() {
+  const AllTextsDarker = document.querySelectorAll(".text-nighttime-darker");
+  for (const text of AllTextsDarker) {
+    text.classList.add("text-daytime-darker");
+    text.classList.remove("text-nighttime-darker");
+  }
+  const AllTextsLighter = document.querySelectorAll(".text-nighttime-lighter");
+  for (const text of AllTextsLighter) {
+    text.classList.add("text-daytime-lighter");
+    text.classList.remove("text-nighttime-lighter");
+  }
+  contentBox = document.querySelector("#content-box");
+  contentBox.classList.add("content-box-daytime");
+  contentBox.classList.remove("content-box-nighttime");
+  currentWeather = document.querySelector("#current-weather-box");
+  currentWeather.classList.add("current-weather-box-daytime");
+  currentWeather.classList.remove("current-weather-box-nighttime");
+
+  let nightInfo = document.querySelector("#day-time");
+  nightInfo.innerHTML = "It's day light ☀";
 }
 
 function formatDate(now) {
@@ -114,7 +164,7 @@ function formatTemperatureFahrenheit() {
   currentTemperatureFormat.innerHTML = temperatureFahrenheit + "°";
   fahrenheitTemperature = temperatureFahrenheit;
 }
-let locationFinder = document.querySelector(".localization-icon");
+let locationFinder = document.querySelector("#localization-icon");
 locationFinder.addEventListener("click", findCurrentLocation);
 
 let citySubmitButton = document.querySelector("#cityForm");
