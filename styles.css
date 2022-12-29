@@ -78,9 +78,17 @@ footer {
 
 /*Styling for current temperature elements*/
 #current-weather-icon {
-  max-width: 130px;
+  max-width: 140px;
   display: block;
   margin: auto;
+}
+#current-weather-description {
+  margin-top: 10px;
+  text-align: center;
+  font-size: large;
+  font-family: "Raleway", sans-serif;
+  color: #474973;
+  text-transform: capitalize;
 }
 #current-temperature {
   font-size: 100px;
@@ -90,7 +98,6 @@ footer {
   color: #474973;
   font-family: "Cabin", sans-serif;
   right: -20px;
-  padding: 30px 10px 10px 10px;
 }
 .celsius-fahrenheit {
   display: flex;

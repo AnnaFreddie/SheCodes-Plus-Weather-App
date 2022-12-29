@@ -19,7 +19,7 @@ function setCity(event) {
 
 function updatePage(response) {
   if (response.data.city === undefined) {
-    alert("Please provide an existing city🧐");
+    alert("Please provide an existing city 🧐");
   } else {
     let tempToday = document.querySelector("#current-temperature");
     tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
@@ -27,6 +27,19 @@ function updatePage(response) {
     cityName.innerHTML = response.data.city;
     let countryName = document.querySelector("h2");
     countryName.innerHTML = response.data.country;
+    let weatherDescription = document.querySelector(
+      "#current-weather-description"
+    );
+    weatherDescription.innerHTML = response.data.condition.description;
+    let currentWeatherIcon = document.querySelector("#current-weather-icon");
+    currentWeatherIcon.setAttribute(
+      "src",
+      `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+    );
+    currentWeatherIcon.setAttribute(
+      "alt",
+      `Weather icon showing ${response.data.condition.description}`
+    );
   }
 }
 
