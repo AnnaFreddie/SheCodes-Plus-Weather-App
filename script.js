@@ -1,5 +1,6 @@
 let apiKey = "t656554481485f7341b044a7o3281c2b";
 let apiUrl = "https://api.shecodes.io/weather/v1/current?units=metric";
+let forecastApiUrl = "https://api.shecodes.io/weather/v1/forecast?units=metric";
 
 function findCurrentLocation() {
   navigator.geolocation.getCurrentPosition(findPosition);
@@ -9,12 +10,18 @@ function findPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   axios.get(`${apiUrl}&key=${apiKey}&lat=${lat}&lon=${lon}`).then(updatePage);
+  axios
+    .get(`${forecastApiUrl}&key=${apiKey}&lat=${lat}&lon=${lon}`)
+    .then(displayForcast);
 }
 
 function setCity(event) {
   event.preventDefault();
   let city = document.querySelector("#localization-input");
   axios.get(`${apiUrl}&key=${apiKey}&query=${city.value}`).then(updatePage);
+  axios
+    .get(`${forecastApiUrl}&key=${apiKey}&query=${city.value}`)
+    .then(displayForcast);
 }
 
 function updatePage(response) {
@@ -41,7 +48,6 @@ function updatePage(response) {
       `Weather icon showing ${response.data.condition.description}`
     );
     celsiusTemperature = response.data.temperature.current;
-
     let pressure = document.querySelector("#pressure");
     pressure.innerHTML = response.data.temperature.pressure;
     let feelsLike = document.querySelector("#feels_like");
@@ -50,7 +56,6 @@ function updatePage(response) {
     humidity.innerHTML = `${response.data.temperature.humidity}%`;
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
-
     if (response.data.condition.icon.slice(-5) == "night") {
       setNight();
     } else {
@@ -76,9 +81,9 @@ function setNight() {
   currentWeather = document.querySelector("#current-weather-box");
   currentWeather.classList.add("current-weather-box-nighttime");
   currentWeather.classList.remove("current-weather-box-daytime");
-
   let nightInfo = document.querySelector("#day-time");
   nightInfo.innerHTML = "It's night time 🌙";
+  dayOrNight = "night";
 }
 
 function removeNight() {
@@ -98,9 +103,9 @@ function removeNight() {
   currentWeather = document.querySelector("#current-weather-box");
   currentWeather.classList.add("current-weather-box-daytime");
   currentWeather.classList.remove("current-weather-box-nighttime");
-
   let nightInfo = document.querySelector("#day-time");
   nightInfo.innerHTML = "It's day light ☀";
+  dayOrNight = "day";
 }
 
 function formatDate(now) {
@@ -145,6 +150,54 @@ function formatDay(now) {
   return `${day}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let day = date.getDay();
+  return days[day];
+}
+
+function displayForcast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#future-weather-box");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-12 col-md-2">
+            <div class="col-3 col-md-12 future-day text-daytime-lighter">
+                  ${formatForecastDay(forecastDay.time)}
+            </div>
+            <div class="col-3 col-md-12">
+                  <img
+                    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                      forecastDay.condition.icon
+                    }.png"
+                    alt="Weather icon showing ${
+                      forecastDay.condition.description
+                    }"
+                    class="future-weather-image"
+                  />
+            </div>
+            <div class="col-6 col-md-12 future-day-temperature text-daytime-lighter">
+                  ${Math.round(forecastDay.temperature.minimum)}° / 
+                  ${Math.round(forecastDay.temperature.maximum)}°
+            </div>
+        </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  if (dayOrNight == "night") {
+    setNight;
+  }
+  if (dayOrNight == "night") {
+    removeNight;
+  }
+}
+
 function formatTemperatureCelsius() {
   temperatureFormatCelsius.classList.add("tempFormat");
   temperatureFormatFahrenheit.classList.remove("tempFormat");
@@ -186,7 +239,11 @@ temperatureFormatFahrenheit.addEventListener(
 );
 let celsiusTemperature = null;
 let fahrenheitTemperature = null;
+let dayOrNight = null;
 
 window.onload = function () {
   axios.get(`${apiUrl}&key=${apiKey}&query=zurich`).then(updatePage);
+  axios
+    .get(`${forecastApiUrl}&key=${apiKey}&query=zurich`)
+    .then(displayForcast);
 };
