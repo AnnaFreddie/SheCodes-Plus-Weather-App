@@ -127,3 +127,7 @@ temperatureFormatFahrenheit.addEventListener(
 );
 let celsiusTemperature = null;
 let fahrenheitTemperature = null;
+
+window.onload = function () {
+  axios.get(`${apiUrl}&key=${apiKey}&query=zurich`).then(updatePage);
+};
