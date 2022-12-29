@@ -40,6 +40,7 @@ function updatePage(response) {
       "alt",
       `Weather icon showing ${response.data.condition.description}`
     );
+    celsiusTemperature = response.data.temperature.current;
   }
 }
 
@@ -88,18 +89,21 @@ function formatDay(now) {
 function formatTemperatureCelsius() {
   temperatureFormatCelsius.classList.add("tempFormat");
   temperatureFormatFahrenheit.classList.remove("tempFormat");
+  let temperatureFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
+  fahrenheitTemperature = temperatureFahrenheit;
   let currentTemperatureFormat = document.querySelector("#current-temperature");
-  let temperatureCalculator = ((51.8 - 32) * 5) / 9;
-  let temperatureCalculatorRounded = Math.round(temperatureCalculator);
-  currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";
+  let temperatureCalculator = Math.round(
+    ((fahrenheitTemperature - 32) * 5) / 9
+  );
+  currentTemperatureFormat.innerHTML = temperatureCalculator + "°";
 }
 function formatTemperatureFahrenheit() {
   temperatureFormatFahrenheit.classList.add("tempFormat");
   temperatureFormatCelsius.classList.remove("tempFormat");
   let currentTemperatureFormat = document.querySelector("#current-temperature");
-  let temperatureCalculator = (11 * 9) / 5 + 32;
-  let temperatureCalculatorRounded = Math.round(temperatureCalculator);
-  currentTemperatureFormat.innerHTML = temperatureCalculatorRounded + "°";
+  let temperatureFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
+  currentTemperatureFormat.innerHTML = temperatureFahrenheit + "°";
+  fahrenheitTemperature = temperatureFahrenheit;
 }
 let locationFinder = document.querySelector(".localization-icon");
 locationFinder.addEventListener("click", findCurrentLocation);
@@ -121,3 +125,5 @@ temperatureFormatFahrenheit.addEventListener(
   "click",
   formatTemperatureFahrenheit
 );
+let celsiusTemperature = null;
+let fahrenheitTemperature = null;
