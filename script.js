@@ -1,6 +1,6 @@
 let apiKey = "t656554481485f7341b044a7o3281c2b";
 let apiUrl = "https://api.shecodes.io/weather/v1/current?units=metric";
-let forecastApiUrl = "https://api.shecodes.io/weather/v1/forecast?units=metric";
+let forecastApiUrl = "https://api.shecodes.io/weather/v1/forecast?";
 
 function findCurrentLocation() {
   navigator.geolocation.getCurrentPosition(findPosition);
@@ -11,16 +11,16 @@ function findPosition(position) {
   let lon = position.coords.longitude;
   axios.get(`${apiUrl}&key=${apiKey}&lat=${lat}&lon=${lon}`).then(updatePage);
   axios
-    .get(`${forecastApiUrl}&key=${apiKey}&lat=${lat}&lon=${lon}`)
+    .get(`${forecastApiUrl}units=metric&key=${apiKey}&lat=${lat}&lon=${lon}`)
     .then(displayForcast);
 }
 
 function setCity(event) {
   event.preventDefault();
-  let city = document.querySelector("#localization-input");
-  axios.get(`${apiUrl}&key=${apiKey}&query=${city.value}`).then(updatePage);
+  let FindCity = document.querySelector("#localization-input");
+  axios.get(`${apiUrl}&key=${apiKey}&query=${FindCity.value}`).then(updatePage);
   axios
-    .get(`${forecastApiUrl}&key=${apiKey}&query=${city.value}`)
+    .get(`${forecastApiUrl}units=metric&key=${apiKey}&query=${FindCity.value}`)
     .then(displayForcast);
 }
 
@@ -32,6 +32,7 @@ function updatePage(response) {
     tempToday.innerHTML = Math.round(response.data.temperature.current) + "°";
     let cityName = document.querySelector("h1");
     cityName.innerHTML = response.data.city;
+    city = response.data.city;
     let countryName = document.querySelector("h2");
     countryName.innerHTML = response.data.country;
     let weatherDescription = document.querySelector(
@@ -57,6 +58,8 @@ function updatePage(response) {
     humidity.innerHTML = `${response.data.temperature.humidity}%`;
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
+    temperatureFormatCelsius.classList.add("tempFormat");
+    temperatureFormatFahrenheit.classList.remove("tempFormat");
     if (response.data.condition.icon.slice(-5) == "night") {
       setNight();
     } else {
@@ -160,7 +163,6 @@ function formatForecastDay(timestamp) {
 
 function displayForcast(response) {
   let forecast = response.data.daily;
-
   let forecastElement = document.querySelector("#future-weather-box");
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
@@ -183,24 +185,19 @@ function displayForcast(response) {
                   />
             </div>
             <div class="col-6 col-md-12 future-day-temperature text-daytime-lighter">
-                  ${Math.round(forecastDay.temperature.minimum)}° / 
-                  ${Math.round(forecastDay.temperature.maximum)}°
-            </div>
-        </div>`;
+                  ${Math.round(forecastDay.temperature.maximum)}° / 
+                  ${Math.round(forecastDay.temperature.minimum)}°
+                  </div>
+                  </div>`;
     }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 
-  // let forecastDayTemperatureMin = response.data.daily;
-  //forecastDayTemperatureMin.forEach(function (forecastDay, index) {
-  //  forecastDayTemperaturesMin[index] = forecastDay.temperature.minimum;
-  //})
-
   if (dayOrNight == "night") {
     setNight;
   }
-  if (dayOrNight == "night") {
+  if (dayOrNight == "day" || dayOrNight == "null") {
     removeNight;
   }
 }
@@ -216,14 +213,20 @@ function formatTemperatureCelsius() {
   );
   currentTemperatureFormat.innerHTML = temperatureCalculator + "°";
 
-  let temperatureFahrenheitFeelsLike =
-    (celsiusTemperatureFeelsLike * 9) / 5 + 32;
+  let temperatureFahrenheitFeelsLike = Math.round(
+    (celsiusTemperatureFeelsLike * 9) / 5 + 32
+  );
   fahrenheitTemperatureFeelsLike = temperatureFahrenheitFeelsLike;
   let currentTemperatureFormatFeelsLike = document.querySelector("#feels_like");
-  let temperatureCalculatorFeelsLike =
-    ((fahrenheitTemperatureFeelsLike - 32) * 5) / 9;
+  let temperatureCalculatorFeelsLike = Math.round(
+    ((fahrenheitTemperatureFeelsLike - 32) * 5) / 9
+  );
   currentTemperatureFormatFeelsLike.innerHTML =
     temperatureCalculatorFeelsLike + "°";
+  celsiusOrFahrenheit = "celsius";
+  axios
+    .get(`${forecastApiUrl}units=metric&key=${apiKey}&query=${city}`)
+    .then(displayForcast);
 }
 function formatTemperatureFahrenheit() {
   temperatureFormatFahrenheit.classList.add("tempFormat");
@@ -233,27 +236,28 @@ function formatTemperatureFahrenheit() {
   currentTemperatureFormat.innerHTML = temperatureFahrenheit + "°";
   fahrenheitTemperature = temperatureFahrenheit;
   let currentTemperatureFormatFellsLike = document.querySelector("#feels_like");
-  let temperatureFahrenheitFeelsLike =
-    (celsiusTemperatureFeelsLike * 9) / 5 + 32;
+  let temperatureFahrenheitFeelsLike = Math.round(
+    (celsiusTemperatureFeelsLike * 9) / 5 + 32
+  );
   currentTemperatureFormatFellsLike.innerHTML =
     temperatureFahrenheitFeelsLike + "°";
   fahrenheitTemperatureFeelsLike = temperatureFahrenheitFeelsLike;
+  celsiusOrFahrenheit = "fahrenheit";
+  axios
+    .get(`${forecastApiUrl}units=imperial&key=${apiKey}&query=${city}`)
+    .then(displayForcast);
 }
+
 let locationFinder = document.querySelector("#localization-icon");
 locationFinder.addEventListener("click", findCurrentLocation);
-
 let citySubmitButton = document.querySelector("#cityForm");
 citySubmitButton.addEventListener("submit", setCity);
-
 let currentTimeShower = document.querySelector("#current-date-time");
 currentTimeShower.innerHTML = formatDate(new Date());
-
 let currentDayShower = document.querySelector("#current-day");
 currentDayShower.innerHTML = formatDay(new Date());
-
 let temperatureFormatCelsius = document.querySelector("#celsius");
 temperatureFormatCelsius.addEventListener("click", formatTemperatureCelsius);
-
 let temperatureFormatFahrenheit = document.querySelector("#fahrenheit");
 temperatureFormatFahrenheit.addEventListener(
   "click",
@@ -261,21 +265,15 @@ temperatureFormatFahrenheit.addEventListener(
 );
 let celsiusTemperature = null;
 let celsiusTemperatureFeelsLike = null;
-let celsiusForecastTemperatureDay0 = null;
-let celsiusForecastTemperatureDay1 = null;
-let celsiusForecastTemperatureDay2 = null;
-let celsiusForecastTemperatureDay3 = null;
-let celsiusForecastTemperatureDay4 = null;
-let celsiusForecastTemperatureDay5 = null;
 let fahrenheitTemperature = null;
 let fahrenheitTemperatureFeelsLike = null;
 let dayOrNight = null;
-//const forecastDayTemperaturesMin = [null, null, null, null, null, null];
-//const forecastDayTemperaturesMax = [null, null, null, null, null, null];
+let celsiusOrFahrenheit = "celsius";
+let city = "Zurich";
 
 window.onload = function () {
-  axios.get(`${apiUrl}&key=${apiKey}&query=zurich`).then(updatePage);
+  axios.get(`${apiUrl}&key=${apiKey}&query=${city}`).then(updatePage);
   axios
-    .get(`${forecastApiUrl}&key=${apiKey}&query=zurich`)
+    .get(`${forecastApiUrl}&key=${apiKey}&query=${city}`)
     .then(displayForcast);
 };
