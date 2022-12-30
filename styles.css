@@ -111,7 +111,7 @@ footer {
 
 /*Styling for current temperature elements*/
 #current-weather-icon {
-  max-width: 140px;
+  max-width: 130px;
   display: block;
   margin: auto;
 }
@@ -169,6 +169,7 @@ footer {
 .future-day-temperature,
 .future-day {
   font-family: "Raleway", sans-serif;
+  color: #b56576;
 }
 .tempFormat {
   font-weight: 900;

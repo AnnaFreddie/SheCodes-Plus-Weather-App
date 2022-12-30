@@ -1,11 +1,12 @@
+//APIs for weather data
 let apiKey = "t656554481485f7341b044a7o3281c2b";
 let apiUrl = "https://api.shecodes.io/weather/v1/current?units=metric";
 let forecastApiUrl = "https://api.shecodes.io/weather/v1/forecast?";
 
+//Finding location via geo location or via city search engine
 function findCurrentLocation() {
   navigator.geolocation.getCurrentPosition(findPosition);
 }
-
 function findPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
@@ -14,7 +15,6 @@ function findPosition(position) {
     .get(`${forecastApiUrl}units=metric&key=${apiKey}&lat=${lat}&lon=${lon}`)
     .then(displayForcast);
 }
-
 function setCity(event) {
   event.preventDefault();
   let FindCity = document.querySelector("#localization-input");
@@ -23,7 +23,7 @@ function setCity(event) {
     .get(`${forecastApiUrl}units=metric&key=${apiKey}&query=${FindCity.value}`)
     .then(displayForcast);
 }
-
+//Running the weather app according to city, loading contents
 function updatePage(response) {
   if (response.data.city === undefined) {
     alert("Please provide an existing city 🧐");
@@ -68,6 +68,7 @@ function updatePage(response) {
   }
 }
 
+//For results where the sun is set, the app will load in a dark theme.
 function setNight() {
   const AllTextsDarker = document.querySelectorAll(".text-daytime-darker");
   for (const text of AllTextsDarker) {
@@ -112,6 +113,7 @@ function removeNight() {
   dayOrNight = "day";
 }
 
+//Formatting the date and time to show when the app was last updated. Shown time is based on local browser data (not searched for city)
 function formatDate(now) {
   let months = [
     "January",
@@ -126,9 +128,7 @@ function formatDate(now) {
     "October",
     "November",
     "December",
-    ,
   ];
-
   let date = now.getDate();
   let year = now.getFullYear();
   let month = months[now.getMonth()];
@@ -145,22 +145,20 @@ function formatDate(now) {
   if (now.getHours() > 12) {
     meridiem = "pm";
   }
-  return `${month} ${date} ${year} - ${hour}:${minute} ${meridiem}`;
+  return `<small><i>Last updated: <br> ${month} ${date} ${year} - ${hour}:${minute} ${meridiem}</i></small>`;
 }
-
 function formatDay(now) {
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   let day = days[now.getDay()];
   return `${day}`;
 }
-
 function formatForecastDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   let day = date.getDay();
   return days[day];
 }
-
+//Shows forecast data. When unit is changed, a new API call is sent to update this function.
 function displayForcast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#future-weather-box");
@@ -170,7 +168,7 @@ function displayForcast(response) {
       forecastHTML =
         forecastHTML +
         `<div class="col-12 col-md-2">
-            <div class="col-3 col-md-12 future-day text-daytime-lighter">
+            <div class="col-3 col-md-12 future-day">
                   ${formatForecastDay(forecastDay.time)}
             </div>
             <div class="col-3 col-md-12">
@@ -184,7 +182,7 @@ function displayForcast(response) {
                     class="future-weather-image"
                   />
             </div>
-            <div class="col-6 col-md-12 future-day-temperature text-daytime-lighter">
+            <div class="col-6 col-md-12 future-day-temperature">
                   ${Math.round(forecastDay.temperature.maximum)}° / 
                   ${Math.round(forecastDay.temperature.minimum)}°
                   </div>
@@ -193,15 +191,9 @@ function displayForcast(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-
-  if (dayOrNight == "night") {
-    setNight;
-  }
-  if (dayOrNight == "day" || dayOrNight == "null") {
-    removeNight;
-  }
 }
 
+//All temperature values can be shown in fahrenheit or celsius. For the forecast data, the function displayForecast() is run again.
 function formatTemperatureCelsius() {
   temperatureFormatCelsius.classList.add("tempFormat");
   temperatureFormatFahrenheit.classList.remove("tempFormat");
@@ -212,7 +204,6 @@ function formatTemperatureCelsius() {
     ((fahrenheitTemperature - 32) * 5) / 9
   );
   currentTemperatureFormat.innerHTML = temperatureCalculator + "°";
-
   let temperatureFahrenheitFeelsLike = Math.round(
     (celsiusTemperatureFeelsLike * 9) / 5 + 32
   );
@@ -248,6 +239,7 @@ function formatTemperatureFahrenheit() {
     .then(displayForcast);
 }
 
+//adding of event listeners and formating date
 let locationFinder = document.querySelector("#localization-icon");
 locationFinder.addEventListener("click", findCurrentLocation);
 let citySubmitButton = document.querySelector("#cityForm");
@@ -263,6 +255,7 @@ temperatureFormatFahrenheit.addEventListener(
   "click",
   formatTemperatureFahrenheit
 );
+//initial variables which can be overwritten in functions
 let celsiusTemperature = null;
 let celsiusTemperatureFeelsLike = null;
 let fahrenheitTemperature = null;
@@ -271,6 +264,7 @@ let dayOrNight = null;
 let celsiusOrFahrenheit = "celsius";
 let city = "Zurich";
 
+//on load function to open app initially with real data.
 window.onload = function () {
   axios.get(`${apiUrl}&key=${apiKey}&query=${city}`).then(updatePage);
   axios
