@@ -96,7 +96,6 @@ footer {
   background-color: #253f6331;
   transition: all 200ms ease;
 }
-
 #submit-button {
   width: 100%;
   line-height: 1.4rem;
@@ -174,7 +173,6 @@ footer {
 .tempFormat {
   font-weight: 900;
 }
-
 #celsius,
 #fahrenheit {
   padding: 0 10px;

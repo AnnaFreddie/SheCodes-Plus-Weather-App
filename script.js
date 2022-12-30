@@ -68,7 +68,7 @@ function updatePage(response) {
   }
 }
 
-//For results where the sun is set, the app will load in a dark theme.
+//For results where the sun is set, the app will load in a dark theme
 function setNight() {
   const AllTextsDarker = document.querySelectorAll(".text-daytime-darker");
   for (const text of AllTextsDarker) {
@@ -266,7 +266,7 @@ let dayOrNight = null;
 let celsiusOrFahrenheit = "celsius";
 let city = "Zurich";
 
-//on load function to open app initially with real data.
+//on load function to open app initially with real data
 window.onload = function () {
   axios.get(`${apiUrl}&key=${apiKey}&query=${city}`).then(updatePage);
   axios
