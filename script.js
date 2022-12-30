@@ -48,6 +48,7 @@ function updatePage(response) {
       `Weather icon showing ${response.data.condition.description}`
     );
     celsiusTemperature = response.data.temperature.current;
+    celsiusTemperatureFeelsLike = response.data.temperature.feels_like;
     let pressure = document.querySelector("#pressure");
     pressure.innerHTML = response.data.temperature.pressure;
     let feelsLike = document.querySelector("#feels_like");
@@ -190,6 +191,12 @@ function displayForcast(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+
+  // let forecastDayTemperatureMin = response.data.daily;
+  //forecastDayTemperatureMin.forEach(function (forecastDay, index) {
+  //  forecastDayTemperaturesMin[index] = forecastDay.temperature.minimum;
+  //})
+
   if (dayOrNight == "night") {
     setNight;
   }
@@ -208,6 +215,15 @@ function formatTemperatureCelsius() {
     ((fahrenheitTemperature - 32) * 5) / 9
   );
   currentTemperatureFormat.innerHTML = temperatureCalculator + "°";
+
+  let temperatureFahrenheitFeelsLike =
+    (celsiusTemperatureFeelsLike * 9) / 5 + 32;
+  fahrenheitTemperatureFeelsLike = temperatureFahrenheitFeelsLike;
+  let currentTemperatureFormatFeelsLike = document.querySelector("#feels_like");
+  let temperatureCalculatorFeelsLike =
+    ((fahrenheitTemperatureFeelsLike - 32) * 5) / 9;
+  currentTemperatureFormatFeelsLike.innerHTML =
+    temperatureCalculatorFeelsLike + "°";
 }
 function formatTemperatureFahrenheit() {
   temperatureFormatFahrenheit.classList.add("tempFormat");
@@ -216,6 +232,12 @@ function formatTemperatureFahrenheit() {
   let temperatureFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32);
   currentTemperatureFormat.innerHTML = temperatureFahrenheit + "°";
   fahrenheitTemperature = temperatureFahrenheit;
+  let currentTemperatureFormatFellsLike = document.querySelector("#feels_like");
+  let temperatureFahrenheitFeelsLike =
+    (celsiusTemperatureFeelsLike * 9) / 5 + 32;
+  currentTemperatureFormatFellsLike.innerHTML =
+    temperatureFahrenheitFeelsLike + "°";
+  fahrenheitTemperatureFeelsLike = temperatureFahrenheitFeelsLike;
 }
 let locationFinder = document.querySelector("#localization-icon");
 locationFinder.addEventListener("click", findCurrentLocation);
@@ -238,8 +260,18 @@ temperatureFormatFahrenheit.addEventListener(
   formatTemperatureFahrenheit
 );
 let celsiusTemperature = null;
+let celsiusTemperatureFeelsLike = null;
+let celsiusForecastTemperatureDay0 = null;
+let celsiusForecastTemperatureDay1 = null;
+let celsiusForecastTemperatureDay2 = null;
+let celsiusForecastTemperatureDay3 = null;
+let celsiusForecastTemperatureDay4 = null;
+let celsiusForecastTemperatureDay5 = null;
 let fahrenheitTemperature = null;
+let fahrenheitTemperatureFeelsLike = null;
 let dayOrNight = null;
+//const forecastDayTemperaturesMin = [null, null, null, null, null, null];
+//const forecastDayTemperaturesMax = [null, null, null, null, null, null];
 
 window.onload = function () {
   axios.get(`${apiUrl}&key=${apiKey}&query=zurich`).then(updatePage);
