@@ -168,6 +168,7 @@ function displayForcast(response) {
       forecastHTML =
         forecastHTML +
         `<div class="col-12 col-md-2">
+            <div class="row">
             <div class="col-3 col-md-12 future-day">
                   ${formatForecastDay(forecastDay.time)}
             </div>
@@ -185,8 +186,9 @@ function displayForcast(response) {
             <div class="col-6 col-md-12 future-day-temperature">
                   ${Math.round(forecastDay.temperature.maximum)}° / 
                   ${Math.round(forecastDay.temperature.minimum)}°
-                  </div>
-                  </div>`;
+            </div>
+            </div>
+          </div>`;
     }
   });
   forecastHTML = forecastHTML + `</div>`;
